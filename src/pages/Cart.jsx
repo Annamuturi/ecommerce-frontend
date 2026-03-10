@@ -65,6 +65,8 @@ const Cart = () => {
         }
     },[products, cartItems])
 
+    console.log("product payload:",products)
+
     useEffect(() => {
         if(user) {
             getUserAddress()
@@ -94,14 +96,15 @@ const Cart = () => {
                             </div>
                             <div>
                                 <p className="hidden md:block font-semibold">{product.name}</p>
-                                <div className="font-normal text-gray-500/70">
-                                    <p>Weight: <span>{product.weight || "N/A"}</span></p>
-                                    <div className='flex items-center'>
+                                <div className="font-normal text-gray-500/70 space-y-1">
+                                    <p>size: <span>{product.size || "N/A"}</span></p>
+                                    <p>color: <span>{product.color || "N/A"}</span></p>
+                                    <div className="flex items-center gap-1">
                                         <p>Qty:</p>
                                         <select 
                                         onChange={e => updateCartItem(product._id, Number(e.target.value))}
                                         value={cartItems[product._id]}
-                                        className='outline-none'>
+                                        className="outline-none border rounded px-1">
                                             {Array(cartItems[product._id] > 9 ? cartItems[product._id] : 9).fill('').map((_, index) => (
                                                 <option key={index} value={index + 1}>{index + 1}</option>
                                             ))}
